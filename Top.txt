@@ -1,0 +1,62 @@
+`timescale 1ns / 1ps
+
+
+
+module fsm_using_one_always_block(input clk,
+input in,
+input reset,
+output reg z);
+reg [1:0] present;
+parameter s0=2'b00;
+parameter s1=2'b01;
+parameter s2=2'b10;
+always @(posedge clk)
+   begin
+    if(reset)
+        present<=s0;
+    else
+      begin
+        case(present)
+        s0:
+        begin
+            if(in)
+                begin
+                    present<=s1;
+                     z<=1'b0;
+                 end
+            else
+                begin
+                    present<=s0;
+                    z<=1'b0;
+                end
+        end
+         s1:
+         begin
+            if(in)
+                begin
+                    present<=s2;
+                     z<=1'b0;
+                end
+            else
+                begin
+                    present<=s0;
+                    z<=1'b0;
+                 end
+        end
+         s2:
+         begin
+            if(in)
+                begin
+                    z<=1'b1;
+                    present<=s2;
+                    end    
+             else
+                begin
+                    present<=s0;
+                    z<=1'b0;
+                end
+         end
+       endcase
+       end
+     end
+endmodule
