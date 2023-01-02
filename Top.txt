@@ -2,10 +2,11 @@
 
 
 
-module fsm_using_one_always_block(input clk,
-input in,
-input reset,
-output reg z);
+module fsm_using_one_always_block(
+                  input clk,
+                  input in,
+                  input reset,
+                  output reg z);
 reg [1:0] present;
 parameter s0=2'b00;
 parameter s1=2'b01;
